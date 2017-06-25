@@ -1,0 +1,115 @@
+$(document).ready(function() {
+	// main menu hover over processing
+	$('.mainNav > li').hover(function () {
+		$(this).toggleClass('focus');
+	});
+	$('.editBar > li').hover(function () {
+		$(this).toggleClass('focus');
+	});
+	$('.dropDown').hover(function () {
+		$(this).children('.submenu').toggle();
+	});
+
+	// fix selected options on back button
+    $("select").each(function () {
+        $(this).val($(this).find('option[selected]').val());
+    });
+
+	// add Chosen selector controls
+	$('select#electiontype').chosen({
+		disable_search: true,
+		allow_single_deselect: true,
+		width: '150px'
+	});
+	$('select#filetypes').chosen({
+		width: '300px'
+	});
+	$('select#electionareas').chosen({
+		disable_search: true,
+		allow_single_deselect: true,
+		inherit_select_classes: true,
+		width: '390px'
+	});
+	$('.searchColumn #sources').chosen({
+		disable_search: true,
+		allow_single_deselect: true
+	}).change(function () {
+		$('#allSources').submit();
+	});
+	$('select#states').chosen({
+		max_selected_options: 10,
+		width: '300px'
+	});
+	$('select#topic').chosen({
+		disable_search: true,
+		allow_single_deselect: true,
+		width: '225px'
+	}).change(function (evt, params) {
+		$('div.topic select').prop('selectedIndex', 0);
+		$('div.topic').hide();
+		if (params) {
+			$('select#topic_' + params['selected']).parent().css('display', 'inline');
+		}
+		$('#allTopics').submit();
+	});
+	$('.searchColumn div.topic select').chosen({
+		disable_search: true,
+		allow_single_deselect: true,
+		width: '225px'
+	}).change(function () {
+		$('#allTopics').submit();
+	});
+	$('div.topic select').chosen({
+		disable_search: true,
+		allow_single_deselect: true,
+		width: '325px'
+	});
+	$('select#year').chosen({
+		disable_search: true,
+		width: '75px'
+	});
+	$('select#years').chosen({
+		width: '300px'
+	});
+	$('.queries_content select').chosen({
+		disable_search: true,
+		allow_single_deselect: true,
+		width: '300px'
+	});
+
+	// process favorite document requests
+	$('.favorite input').click(function () {
+		var now = new Date();
+		$.ajax(
+			'search.php?favorite=' + encodeURIComponent($(this).prop('value')) + '&action=' + ($(this).hasClass('saved') ? 'remove' : 'add') + '&time=' + now.getTime(),
+			{context: this}
+		).done(function (data) {
+			if (!data.length || data.indexOf('is full') == -1)
+				$(this).toggleClass('saved');
+			if (data.length)
+				alert(data);
+		});
+	});
+	
+	// add support for placeholder attribute in non-supporting browsers
+	$('[placeholder]').focus(function() {
+		var input = $(this);
+		if (input.val() == input.attr('placeholder')) {
+			input.val('');
+			input.removeClass('placeholder');
+		}
+	}).blur(function() {
+		var input = $(this);
+		if (input.val() == '' || input.val() == input.attr('placeholder')) {
+			input.addClass('placeholder');
+			input.val(input.attr('placeholder'));
+		}
+	}).blur().parents('form').submit(function() {
+		$(this).find('[placeholder]').each(function() {
+			var input = $(this);
+			if (input.val() == input.attr('placeholder')) {
+				input.val('');
+			}
+		})
+	});	
+});

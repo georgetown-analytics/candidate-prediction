@@ -1,0 +1,41 @@
+﻿(function(){
+var CM8CE = (window.CM8E && CM8E['vec.other_pages']) || {};
+var CM8CES = (CM8CE.serialsData && CM8CE.serialsData[1000]) || {};
+if (CM8CE.requestReceived)
+	CM8CE.requestReceived(1000, [], '283,0,282,1,280,21,122,4225009011,120,4000000011,118,1,117,225009,116,225,104,19,103,21,43,4,34,6,32,0,', '', 'D', []);
+
+CM8CES.CM8Titles=[
+	['Leaderboard-atyp',22508, 4294967295, 0, []],
+	['300x250_top-atyp',22505, 4294967295, 0, []],
+	['300x250-skyscraper-atyp',22507, 4294967295, 0, []],
+	['Leaderboard-bottom-atyp',22509, 4294967295, 0, []]];
+var CM8CheckErrorsAlreadyCalled=false;
+function CM8CheckErrors() {
+	if (CM8CheckErrorsAlreadyCalled)
+		return;
+	CM8CheckErrorsAlreadyCalled=true;
+	var A='';  CM8CE.sumPHsOf1Call();
+	for (var B=0;typeof(CM8CES.CM8Titles[B])!='undefined';B++) {
+		var E=''; var D=CM8CES.CM8Titles[B]; var F=D[4];
+		for (var C=0;typeof(F[C])!='undefined';C++) {
+			if (!F[C].used) {
+				E+=','+F[C][1]+'/'+F[C][2];
+			}
+		}
+		if (D[3]<D[2]) {
+			A+='&F'+D[1]+','+D[2]+','+D[3]+E;
+		}
+	}
+	if (A!='') {
+		CM8CE.report = new Image();
+		CM8CE.report.src='http://sage.checkm8.com/adam/report?106423&'+CM8CE.page+'&'+CM8GetLocation()+'&1496075676&Y&32_0_34_6_43_4_103_21_104_19_116_225_117_225009_118_1_120_4000000011_122_4225009011_280_21_282_1_283_0_'+A;
+	}
+}
+if (window.addEventListener)
+	window.addEventListener('load', CM8CheckErrors, false);
+else if(document.addEventListener)
+	document.addEventListener('load', CM8CheckErrors, false);
+else if(window.attachEvent)
+	window.attachEvent('onload', CM8CheckErrors);
+
+})();
