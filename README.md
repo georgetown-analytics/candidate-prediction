@@ -37,15 +37,15 @@ Our group created an AWS instance for a PostgreSQL database to store our informa
 
 *Computation and Analysis*
 
-We conducted initial data exploration to better understand the data we were working with, and which features would be most relevant to our model.
+We conducted initial data exploration to better understand the data we were working with, and which features would be most relevant to our model. Utilizing violin plots, scatterplots, and box plots, we looked at the relationships between the features to see which would be most valuable to include, and what transformations of the data may be necessary. 
 
 *Modeling and Application*
 
-For the model, we determined that a linear SVC model would be most applicable to our study.
+For the model, we determined that a classification model would be most applicable. We ran several tests to determine the best fit.
 
 *Visualization*
 
-As an initial cut at visualization, we looked at a subset of the FEC dataset. This jupyter notebook walks through initial network calculations and visualizations to understand the nature of donor networks, and how we many want to further incorporate network analysis into future models.
+As an initial cut at visualization, we looked at a subset of the FEC dataset. This jupyter notebook walks through initial network calculations and visualizations to understand the nature of donor networks, and how we many want to further incorporate network analysis into future models. Additionally we generated a few choropleths to look at the FEC data in a different way, which illuminated some unexpected insights. 
 
 **Future Analysis and Applications**
 
